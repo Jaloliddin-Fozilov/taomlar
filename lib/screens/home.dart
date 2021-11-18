@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/category_model.dart';
+import '../widgets/category_item.dart';
+
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final List<CategoryModel> categories;
+  const Home({Key? key, required this.categories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,32 +22,9 @@ class Home extends StatelessWidget {
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
         ),
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: Image.asset(
-                    "assets/images/cola.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Container(
-                  color: Colors.black.withOpacity(0.4),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    "Ichimliklar",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        children: categories
+            .map((category) => CategoryItem(category: category))
+            .toList(),
       ),
     );
   }
