@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import './screens/home.dart';
 import './models/category_model.dart';
+import './screens/category_meals_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: Home(categories: _categoryModel.list),
+      routes: {
+        '/category-meals': (ctx) => CategoryMealsScreen(),
+      },
     );
   }
 }
