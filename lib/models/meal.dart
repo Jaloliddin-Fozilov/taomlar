@@ -1,7 +1,7 @@
 class Meal {
   final String id;
   final String title;
-  final String imageUrl;
+  final List<String> imageUrls;
   final String description;
   final List<String> ingredients;
   final int preparingTime;
@@ -12,7 +12,7 @@ class Meal {
   Meal({
     required this.id,
     required this.title,
-    required this.imageUrl,
+    required this.imageUrls,
     required this.description,
     required this.ingredients,
     required this.preparingTime,
@@ -27,7 +27,11 @@ class Meals {
     Meal(
       id: 'm1',
       title: 'Lavash',
-      imageUrl: 'assets/images/lavash.jpg',
+      imageUrls: [
+        'assets/images/lavash.jpg',
+        'assets/images/lavash1.jpg',
+        'assets/images/lavash2.jpg'
+      ],
       description: 'Ajoyib lavash',
       ingredients: ["go'sht", "pomidor", "bording"],
       preparingTime: 10,
@@ -37,7 +41,12 @@ class Meals {
     Meal(
       id: 'm2',
       title: 'Burger',
-      imageUrl: 'assets/images/burger.jpg',
+      imageUrls: [
+        'assets/images/burger.jpg',
+        'assets/images/burger1.jpg',
+        'assets/images/burger2.jpg',
+        'assets/images/burger3.jpg'
+      ],
       description: 'Ajoyib burger',
       ingredients: ["go'sht", "pomidor", "bording"],
       preparingTime: 15,
@@ -47,7 +56,12 @@ class Meals {
     Meal(
       id: 'm3',
       title: 'Osh',
-      imageUrl: 'assets/images/uzbekplov.jpg',
+      imageUrls: [
+        'assets/images/uzbekplov.jpg',
+        'assets/images/uzbekplov1.jpg',
+        'assets/images/uzbekplov2.jpg',
+        'assets/images/uzbekplov3.jpg'
+      ],
       description: 'Ajoyib Osh',
       ingredients: ["go'sht", "guruch", "sabzi"],
       preparingTime: 10,
@@ -57,7 +71,11 @@ class Meals {
     Meal(
       id: 'm4',
       title: 'Somsa',
-      imageUrl: 'assets/images/somsa.jpg',
+      imageUrls: [
+        'assets/images/somsa.jpg',
+        'assets/images/somsa1.jpg',
+        'assets/images/somsa2.jpg'
+      ],
       description: 'Ajoyib Somsa',
       ingredients: ["go'sht", "piyoz", "tuz"],
       preparingTime: 15,
@@ -67,7 +85,12 @@ class Meals {
     Meal(
       id: 'm5',
       title: 'Pizza',
-      imageUrl: 'assets/images/pizza.jpg',
+      imageUrls: [
+        'assets/images/pizza.jpg',
+        'assets/images/pizza1.jpg',
+        'assets/images/pizza2.jpg',
+        'assets/images/pizza3.jpg'
+      ],
       description: 'Ajoyib Pizza',
       ingredients: ["go'sht", "pomidor", "bording"],
       preparingTime: 15,
@@ -77,7 +100,12 @@ class Meals {
     Meal(
       id: 'm6',
       title: 'Coca cola',
-      imageUrl: 'assets/images/cola.jpg',
+      imageUrls: [
+        'assets/images/cola.jpg',
+        'assets/images/cola1.jpg',
+        'assets/images/cola2.jpg',
+        'assets/images/cola3.png'
+      ],
       description: 'Ajoyib Coca cola',
       ingredients: [],
       preparingTime: 1,
@@ -87,7 +115,7 @@ class Meals {
     Meal(
       id: 'm7',
       title: 'Mauntain Dew',
-      imageUrl: 'assets/images/mdew.jpg',
+      imageUrls: ['assets/images/mdew.jpg', 'assets/images/mdew1.jpg'],
       description: 'Ajoyib Mauntain Dew',
       ingredients: [],
       preparingTime: 1,
@@ -97,12 +125,27 @@ class Meals {
     Meal(
       id: 'm8',
       title: 'Nicoise',
-      imageUrl: 'assets/images/nicoise.jpg',
+      imageUrls: ['assets/images/nicoise.jpg', 'assets/images/nicoise1.jpg'],
       description: 'Ajoyib Nicoise salati',
       ingredients: ["kartoshka", "tuxum", "pomidor"],
       preparingTime: 10,
       price: 15,
       categoryId: 'c6',
+    ),
+    Meal(
+      id: 'm9',
+      title: 'Salatlar',
+      imageUrls: [
+        'assets/images/salat.jpg',
+        'assets/images/salat1.jpg',
+        'assets/images/salat2.jpg',
+        'assets/images/salat3.jpg'
+      ],
+      description: 'Ajoyib salatlar',
+      ingredients: ["kartoshka", "tuxum", "pomidor"],
+      preparingTime: 10,
+      price: 15,
+      categoryId: 'c4',
     ),
   ];
   List<Meal> get list {

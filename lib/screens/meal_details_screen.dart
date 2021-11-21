@@ -1,12 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import '../models/meal.dart';
 
-class MealDetailsScreen extends StatelessWidget {
+class MealDetailsScreen extends StatefulWidget {
   const MealDetailsScreen({Key? key}) : super(key: key);
 
   static const routeName = '/meal-details';
+
+  @override
+  State<MealDetailsScreen> createState() => _MealDetailsScreenState();
+}
+
+class _MealDetailsScreenState extends State<MealDetailsScreen> {
+  int activeImageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +27,43 @@ class MealDetailsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset(
-              meal.imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 250,
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 300.0,
+                viewportFraction: 1,
+                initialPage: activeImageIndex,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    activeImageIndex = index;
+                  });
+                },
+              ),
+              items: meal.imageUrls.map((image) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(image, fit: BoxFit.cover),
+                );
+              }).toList(),
             ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: meal.imageUrls.map((image) {
+                  final imageIndex = meal.imageUrls.indexOf(image);
+                  return Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 5,
+                    ),
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: activeImageIndex == imageIndex
+                          ? Colors.black
+                          : Colors.grey,
+                      shape: BoxShape.circle,
+                    ),
+                  );
+                }).toList()),
             Text(
               "\$${meal.price}",
               style: TextStyle(fontSize: 20),

@@ -30,7 +30,7 @@ class MealItem extends StatelessWidget {
                     width: double.infinity,
                     height: 250,
                     child: Image.asset(
-                      meal.imageUrl,
+                      meal.imageUrls[0],
                       fit: BoxFit.cover,
                     ),
                   ),
