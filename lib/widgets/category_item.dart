@@ -2,20 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import '../models/meal.dart';
+
 import 'package:taomlar/screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final CategoryModel category;
+  final List<Meal> meals;
   const CategoryItem({
     Key? key,
     required this.category,
+    required this.meals,
   }) : super(key: key);
 
   void _goToCategoryMealsScreen(BuildContext context) {
     // Navigator.of(context)
     //     .push(MaterialPageRoute(builder: (ctx) => CategoryMealsScreen()));
-    Navigator.of(context)
-        .pushNamed('/category-meals', arguments: category.title);
+    Navigator.of(context).pushNamed('/category-meals', arguments: {
+      'categoryTitle': category.title,
+      'categoryMeals': meals,
+    });
   }
 
   @override

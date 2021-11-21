@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import '../models/meal.dart';
 import '../widgets/category_item.dart';
 
 class Home extends StatelessWidget {
   final List<CategoryModel> categories;
-  const Home({Key? key, required this.categories}) : super(key: key);
+  final List<Meal> meals;
+  const Home({
+    Key? key,
+    required this.categories,
+    required this.meals,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +28,11 @@ class Home extends StatelessWidget {
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
         ),
-        children: categories
-            .map((category) => CategoryItem(category: category))
-            .toList(),
+        children: categories.map((category) {
+          final categoryMeals =
+              meals.where((meal) => meal.categoryId == category.id).toList();
+          return CategoryItem(category: category, meals: categoryMeals);
+        }).toList(),
       ),
     );
   }

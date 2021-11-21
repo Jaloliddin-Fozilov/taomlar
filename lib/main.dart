@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import './screens/home.dart';
-import './models/category_model.dart';
 import './screens/category_meals_screen.dart';
+import './screens/meal_details_screen.dart';
+import './models/category_model.dart';
+import './models/meal.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
   final _categoryModel = CategoriesModels();
+  final _mealModel = Meals();
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,13 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.adventPro().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      home: Home(categories: _categoryModel.list),
+      home: Home(
+        categories: _categoryModel.list,
+        meals: _mealModel.list,
+      ),
       routes: {
-        '/category-meals': (ctx) => CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
+        MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
       },
     );
   }
