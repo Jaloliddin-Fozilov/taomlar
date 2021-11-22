@@ -20,10 +20,30 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  var tabIndex = 0;
+  var _tabIndex = 0;
+  List<Map<String, dynamic>> _pages = [];
+
+  @override
+  void initState() {
+    _pages = [
+      {
+        'page': Home(
+          categories: widget.categories,
+          meals: widget.meals,
+        ),
+        'title': "Ovqatlar menyusi",
+      },
+      {
+        'page': FavoritesScreen(),
+        'title': "Sevimli ovqatlar",
+      }
+    ];
+    super.initState();
+  }
+
   void _changeTab(int index) {
     setState(() {
-      tabIndex = index;
+      _tabIndex = index;
     });
   }
 
@@ -32,17 +52,15 @@ class _TabsScreenState extends State<TabsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Ovqatlar menyusi"),
+        title: Text(_pages[_tabIndex]['title']),
       ),
-      body: Center(
-        child: Text("Salom"),
-      ),
+      body: _pages[_tabIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).primaryColor,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white,
         onTap: _changeTab,
-        currentIndex: tabIndex,
+        currentIndex: _tabIndex,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(

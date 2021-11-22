@@ -15,19 +15,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-      padding: EdgeInsets.all(15),
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        childAspectRatio: 3 / 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-      ),
-      children: categories.map((category) {
-        final categoryMeals =
-            meals.where((meal) => meal.categoryId == category.id).toList();
-        return CategoryItem(category: category, meals: categoryMeals);
-      }).toList(),
-    );
+    return categories.length > 0
+        ? GridView(
+            padding: EdgeInsets.all(15),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3 / 2,
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+            ),
+            children: categories.map((category) {
+              final categoryMeals = meals
+                  .where((meal) => meal.categoryId == category.id)
+                  .toList();
+              return CategoryItem(category: category, meals: categoryMeals);
+            }).toList(),
+          )
+        : Center(
+            child: Text("Hali kategoriyalar qo'shilmagan."),
+          );
   }
 }
