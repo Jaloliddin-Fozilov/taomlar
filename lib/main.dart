@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:taomlar/screens/tabs_screen.dart';
 import './screens/home.dart';
 import './screens/category_meals_screen.dart';
 import './screens/meal_details_screen.dart';
@@ -25,11 +27,12 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.adventPro().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      home: Home(
-        categories: _categoryModel.list,
-        meals: _mealModel.list,
-      ),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => TabsScreen(
+              categories: _categoryModel.list,
+              meals: _mealModel.list,
+            ),
         CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
       },

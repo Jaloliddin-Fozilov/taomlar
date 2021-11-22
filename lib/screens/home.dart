@@ -15,25 +15,19 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Ovqatlar Menyusi"),
+    return GridView(
+      padding: EdgeInsets.all(15),
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 3 / 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
       ),
-      body: GridView(
-        padding: EdgeInsets.all(15),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-        ),
-        children: categories.map((category) {
-          final categoryMeals =
-              meals.where((meal) => meal.categoryId == category.id).toList();
-          return CategoryItem(category: category, meals: categoryMeals);
-        }).toList(),
-      ),
+      children: categories.map((category) {
+        final categoryMeals =
+            meals.where((meal) => meal.categoryId == category.id).toList();
+        return CategoryItem(category: category, meals: categoryMeals);
+      }).toList(),
     );
   }
 }
