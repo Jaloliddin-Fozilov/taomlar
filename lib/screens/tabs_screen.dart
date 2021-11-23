@@ -6,6 +6,8 @@ import 'favorite_screen.dart';
 import '../models/category_model.dart';
 import '../models/meal.dart';
 
+import '../widgets/main_drawer.dart';
+
 class TabsScreen extends StatefulWidget {
   final List<CategoryModel> categories;
   final Meals mealModel;
@@ -62,9 +64,7 @@ class _TabsScreenState extends State<TabsScreen> {
         centerTitle: true,
         title: Text(_pages[_tabIndex]['title']),
       ),
-      drawer: const Drawer(
-        child: Text("Drawer menu"),
-      ),
+      drawer: const MainDrawer(),
       body: _pages[_tabIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).primaryColor,
