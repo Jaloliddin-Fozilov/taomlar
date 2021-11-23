@@ -10,14 +10,30 @@ import './models/category_model.dart';
 import './models/meal.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _categoryModel = CategoriesModels();
+
   final _mealModel = Meals();
+
+  void _toggleLike(String mealId) {
+    setState(() {
+      _mealModel.toggleLike(mealId);
+    });
+  }
+
+  bool _isFavorite(String mealId) {
+    return _mealModel.favorites.any((meal) => meal.id == mealId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +47,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (ctx) => TabsScreen(
               categories: _categoryModel.list,
-              meals: _mealModel.list,
+              mealModel: _mealModel,
+              toggleLike: _toggleLike,
+              isFavorite: _isFavorite,
             ),
-        CategoryMealsScreen.routeName: (ctx) => const CategoryMealsScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
+            toggleLikie: _toggleLike, isFavorite: _isFavorite),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
       },
     );

@@ -4,7 +4,13 @@ import 'package:taomlar/models/meal.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
-  const CategoryMealsScreen({Key? key}) : super(key: key);
+  final Function toggleLikie;
+  final Function isFavorite;
+  const CategoryMealsScreen({
+    Key? key,
+    required this.toggleLikie,
+    required this.isFavorite,
+  }) : super(key: key);
 
   static const routeName = '/category-meals';
 
@@ -22,7 +28,11 @@ class CategoryMealsScreen extends StatelessWidget {
       body: meals.length > 0
           ? ListView.builder(
               padding: const EdgeInsets.all(10),
-              itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+              itemBuilder: (ctx, index) => MealItem(
+                meal: meals[index],
+                toggleLikie: toggleLikie,
+                isFavorite: isFavorite,
+              ),
               itemCount: meals.length,
             )
           : const Center(

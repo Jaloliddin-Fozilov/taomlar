@@ -8,11 +8,15 @@ import '../models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
   final List<CategoryModel> categories;
-  final List<Meal> meals;
+  final Meals mealModel;
+  final Function toggleLike;
+  final Function isFavorite;
   const TabsScreen({
     Key? key,
     required this.categories,
-    required this.meals,
+    required this.mealModel,
+    required this.toggleLike,
+    required this.isFavorite,
   }) : super(key: key);
 
   @override
@@ -29,12 +33,16 @@ class _TabsScreenState extends State<TabsScreen> {
       {
         'page': Home(
           categories: widget.categories,
-          meals: widget.meals,
+          meals: widget.mealModel.list,
         ),
         'title': "Ovqatlar menyusi",
       },
       {
-        'page': FavoritesScreen(),
+        'page': FavoritesScreen(
+          favorites: widget.mealModel.favorites,
+          toggleLike: widget.toggleLike,
+          isFavorite: widget.isFavorite,
+        ),
         'title': "Sevimli ovqatlar",
       }
     ];
@@ -53,6 +61,9 @@ class _TabsScreenState extends State<TabsScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(_pages[_tabIndex]['title']),
+      ),
+      drawer: const Drawer(
+        child: Text("Drawer menu"),
       ),
       body: _pages[_tabIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(

@@ -5,9 +5,13 @@ import '../screens/meal_details_screen.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+  final Function toggleLikie;
+  final Function isFavorite;
   const MealItem({
     Key? key,
     required this.meal,
+    required this.toggleLikie,
+    required this.isFavorite,
   }) : super(key: key);
 
   void _goToMealDetails(BuildContext context) {
@@ -60,9 +64,11 @@ class MealItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () => toggleLikie(meal.id),
                       icon: Icon(
-                        meal.isLike ? Icons.favorite : Icons.favorite_outline,
+                        isFavorite(meal.id)
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
                         color: Colors.black54,
                         size: 20,
                       ),
