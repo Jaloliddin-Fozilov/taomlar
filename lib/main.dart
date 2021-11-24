@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:taomlar/screens/products_screen.dart';
 
 import 'package:taomlar/screens/tabs_screen.dart';
 import './screens/home.dart';
@@ -9,6 +8,8 @@ import './screens/category_meals_screen.dart';
 import './screens/meal_details_screen.dart';
 import './models/category_model.dart';
 import './models/meal.dart';
+import 'package:taomlar/screens/products_screen.dart';
+import './screens/add_new_product_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,6 +58,8 @@ class _MyAppState extends State<MyApp> {
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
         ProductsScreen.routName: (ctx) =>
             ProductsScreen(meals: _mealModel.list),
+        AddNewProductScreen.routName: (ctx) =>
+            AddNewProductScreen(categories: _categoryModel.list),
       },
     );
   }

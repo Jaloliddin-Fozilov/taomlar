@@ -37,10 +37,10 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           _buildMenuItem(Icons.home, "Bosh sahifa", () {
-            Navigator.of(context).pushNamed(TabsScreen.routName);
+            Navigator.of(context).pushReplacementNamed(TabsScreen.routName);
           }),
           _buildMenuItem(Icons.category, "Mahsulotlar", () {
-            Navigator.of(context).pushNamed(ProductsScreen.routName);
+            Navigator.of(context).pushReplacementNamed(ProductsScreen.routName);
           }),
         ],
       ),

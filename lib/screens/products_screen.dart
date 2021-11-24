@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 import '../widgets/main_drawer.dart';
+import './add_new_product_screen.dart';
 
 class ProductsScreen extends StatelessWidget {
   final List<Meal> meals;
@@ -13,6 +14,10 @@ class ProductsScreen extends StatelessWidget {
 
   static const routName = '/products_screen';
 
+  void _goToAddNewProductScreen(BuildContext context) {
+    Navigator.of(context).pushNamed(AddNewProductScreen.routName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +26,7 @@ class ProductsScreen extends StatelessWidget {
         title: const Text("Mahsulotlar"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => _goToAddNewProductScreen(context),
             icon: const Icon(Icons.add),
           ),
         ],
