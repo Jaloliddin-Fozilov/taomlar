@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taomlar/screens/products_screen.dart';
 
 import 'package:taomlar/screens/tabs_screen.dart';
 import './screens/home.dart';
@@ -43,9 +44,9 @@ class _MyAppState extends State<MyApp> {
         fontFamily: GoogleFonts.adventPro().fontFamily,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: TabsScreen.routName,
       routes: {
-        '/': (ctx) => TabsScreen(
+        TabsScreen.routName: (ctx) => TabsScreen(
               categories: _categoryModel.list,
               mealModel: _mealModel,
               toggleLike: _toggleLike,
@@ -54,6 +55,8 @@ class _MyAppState extends State<MyApp> {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(
             toggleLikie: _toggleLike, isFavorite: _isFavorite),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
+        ProductsScreen.routName: (ctx) =>
+            ProductsScreen(meals: _mealModel.list),
       },
     );
   }

@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:taomlar/screens/products_screen.dart';
+import 'package:taomlar/screens/tabs_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -34,8 +36,12 @@ class MainDrawer extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          _buildMenuItem(Icons.home, "Bosh sahifa", () {}),
-          _buildMenuItem(Icons.category, "Mahsulotlar", () {}),
+          _buildMenuItem(Icons.home, "Bosh sahifa", () {
+            Navigator.of(context).pushNamed(TabsScreen.routName);
+          }),
+          _buildMenuItem(Icons.category, "Mahsulotlar", () {
+            Navigator.of(context).pushNamed(ProductsScreen.routName);
+          }),
         ],
       ),
     );

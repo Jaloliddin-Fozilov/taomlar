@@ -21,6 +21,8 @@ class TabsScreen extends StatefulWidget {
     required this.isFavorite,
   }) : super(key: key);
 
+  static const routName = "/";
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
