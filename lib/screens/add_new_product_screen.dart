@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
+import '../widgets/custom_image_input.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   final List<CategoryModel> categories;
@@ -17,6 +18,16 @@ class AddNewProductScreen extends StatefulWidget {
 
 class _AddNewProductScreenState extends State<AddNewProductScreen> {
   late String categoryId;
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _ingredientsController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _preparingController = TextEditingController();
+  final _mainImageController = TextEditingController();
+  final _firstImageController = TextEditingController();
+  final _secondImageController = TextEditingController();
+  final _thirdImageController = TextEditingController();
+  List<String> _imageUrls = [];
 
   @override
   void initState() {
@@ -30,6 +41,12 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Ovqat qo'shish"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.save),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -50,6 +67,60 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                           value: category.id,
                         ))
                     .toList(),
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Ovqat nomi",
+                ),
+                controller: _titleController,
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Ovqat tarifi",
+                ),
+                maxLines: 5,
+                controller: _descriptionController,
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText:
+                      "Ovqat tarikibi (Misol uchun: go'sht, Pomidor, ...)",
+                ),
+                controller: _ingredientsController,
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Ovqat Narxi",
+                ),
+                keyboardType: TextInputType.number,
+                controller: _priceController,
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: "Tayyorlanish vaqti (minutda)",
+                ),
+                keyboardType: TextInputType.number,
+                controller: _preparingController,
+              ),
+              CustomImageInput(
+                imageUrl: _imageUrls.length > 0 ? _imageUrls[0] : '',
+                imageController: _mainImageController,
+                label: 'Asosiy rasm linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageUrl: _imageUrls.length > 1 ? _imageUrls[1] : '',
+                imageController: _firstImageController,
+                label: 'Rasm 1 linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageUrl: _imageUrls.length > 2 ? _imageUrls[2] : '',
+                imageController: _secondImageController,
+                label: 'Rasm 2 linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageUrl: _imageUrls.length > 3 ? _imageUrls[3] : '',
+                imageController: _thirdImageController,
+                label: 'Rasm 3 linkini kiriting!',
               ),
             ],
           ),
