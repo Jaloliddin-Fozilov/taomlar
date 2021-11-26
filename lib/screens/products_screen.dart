@@ -5,17 +5,28 @@ import '../models/meal.dart';
 import '../widgets/main_drawer.dart';
 import './add_new_product_screen.dart';
 
-class ProductsScreen extends StatelessWidget {
+class ProductsScreen extends StatefulWidget {
   final List<Meal> meals;
+  final Function deleteMeal;
   const ProductsScreen({
     Key? key,
     required this.meals,
+    required this.deleteMeal,
   }) : super(key: key);
 
   static const routName = '/products_screen';
 
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
   void _goToAddNewProductScreen(BuildContext context) {
-    Navigator.of(context).pushNamed(AddNewProductScreen.routName);
+    Navigator.of(context).pushNamed(AddNewProductScreen.routName).then((value) {
+      if (value != null) {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -33,22 +44,23 @@ class ProductsScreen extends StatelessWidget {
       ),
       drawer: const MainDrawer(),
       body: ListView.builder(
-        itemCount: meals.length,
+        itemCount: widget.meals.length,
         itemBuilder: (ctx, index) => Card(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: meals[index].imageUrls[0].startsWith("assets/")
-                  ? AssetImage(
-                      meals[index].imageUrls[0],
-                    )
-                  : NetworkImage(
-                      meals[index].imageUrls[0],
-                    ) as ImageProvider,
+              backgroundImage:
+                  widget.meals[index].imageUrls[0].startsWith("assets/")
+                      ? AssetImage(
+                          widget.meals[index].imageUrls[0],
+                        )
+                      : NetworkImage(
+                          widget.meals[index].imageUrls[0],
+                        ) as ImageProvider,
             ),
-            title: Text(meals[index].title),
-            subtitle: Text("\$${meals[index].price}"),
+            title: Text(widget.meals[index].title),
+            subtitle: Text("\$${widget.meals[index].price}"),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () => widget.deleteMeal(widget.meals[index].id),
               icon: const Icon(
                 Icons.delete,
                 size: 20,

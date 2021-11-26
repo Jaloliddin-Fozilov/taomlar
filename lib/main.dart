@@ -37,7 +37,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _addNewMeal(Meal meal) {
-    _mealModel.addNewMeal(meal);
+    setState(() {
+      _mealModel.addNewMeal(meal);
+    });
+  }
+
+  void _deleteMeal(String id) {
+    setState(() {
+      _mealModel.deleteMeal(id);
+    });
   }
 
   @override
@@ -60,7 +68,7 @@ class _MyAppState extends State<MyApp> {
             toggleLikie: _toggleLike, isFavorite: _isFavorite),
         MealDetailsScreen.routeName: (ctx) => const MealDetailsScreen(),
         ProductsScreen.routName: (ctx) =>
-            ProductsScreen(meals: _mealModel.list),
+            ProductsScreen(meals: _mealModel.list, deleteMeal: _deleteMeal),
         AddNewProductScreen.routName: (ctx) => AddNewProductScreen(
               categories: _categoryModel.list,
               addFunction: _addNewMeal,

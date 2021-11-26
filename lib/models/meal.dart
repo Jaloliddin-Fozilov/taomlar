@@ -169,4 +169,8 @@ class Meals {
   void addNewMeal(Meal meal) {
     _list.add(meal);
   }
+
+  void deleteMeal(String id) {
+    _list.removeWhere((meal) => meal.id == id);
+  }
 }

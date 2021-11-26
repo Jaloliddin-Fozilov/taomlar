@@ -80,7 +80,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       ),
     );
 
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(true);
   }
 
   @override
