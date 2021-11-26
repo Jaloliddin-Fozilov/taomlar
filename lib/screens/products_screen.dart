@@ -37,9 +37,13 @@ class ProductsScreen extends StatelessWidget {
         itemBuilder: (ctx, index) => Card(
           child: ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage(
-                meals[index].imageUrls[0],
-              ),
+              backgroundImage: meals[index].imageUrls[0].startsWith("assets/")
+                  ? AssetImage(
+                      meals[index].imageUrls[0],
+                    )
+                  : NetworkImage(
+                      meals[index].imageUrls[0],
+                    ) as ImageProvider,
             ),
             title: Text(meals[index].title),
             subtitle: Text("\$${meals[index].price}"),

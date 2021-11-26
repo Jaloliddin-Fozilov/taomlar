@@ -165,4 +165,8 @@ class Meals {
       _favorites.removeWhere((meal) => meal.id == mealId);
     }
   }
+
+  void addNewMeal(Meal meal) {
+    _list.add(meal);
+  }
 }

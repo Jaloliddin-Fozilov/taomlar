@@ -33,10 +33,15 @@ class MealItem extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 250,
-                    child: Image.asset(
-                      meal.imageUrls[0],
-                      fit: BoxFit.cover,
-                    ),
+                    child: meal.imageUrls[0].startsWith("assets/")
+                        ? Image.asset(
+                            meal.imageUrls[0],
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            meal.imageUrls[0],
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   Positioned(
                     bottom: 0,

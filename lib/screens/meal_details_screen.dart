@@ -41,7 +41,15 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               items: meal.imageUrls.map((image) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  child: Image.asset(image, fit: BoxFit.cover),
+                  child: image.startsWith("assets/")
+                      ? Image.asset(
+                          image,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
                 );
               }).toList(),
             ),

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../models/category_model.dart';
 import '../widgets/custom_image_input.dart';
+import '../models/meal.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   final List<CategoryModel> categories;
+  final Function addFunction;
   const AddNewProductScreen({
     Key? key,
     required this.categories,
+    required this.addFunction,
   }) : super(key: key);
 
   static const routName = '/add-new-product';
@@ -27,12 +30,57 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   final _firstImageController = TextEditingController();
   final _secondImageController = TextEditingController();
   final _thirdImageController = TextEditingController();
-  List<String> _imageUrls = [];
 
   @override
   void initState() {
     super.initState();
     categoryId = widget.categories[0].id;
+  }
+
+  void _save() {
+    final title = _titleController.text;
+    final desc = _descriptionController.text;
+    final ingred = _ingredientsController.text;
+    final price = _priceController.text;
+    final prepTime = _preparingController.text;
+    final mainImage = _mainImageController.text;
+    final firstImage = _firstImageController.text;
+    final secondImage = _secondImageController.text;
+    final thirdImage = _thirdImageController.text;
+
+    if (title.isEmpty ||
+        desc.isEmpty ||
+        ingred.isEmpty ||
+        prepTime.isEmpty ||
+        mainImage.isEmpty ||
+        firstImage.isEmpty ||
+        secondImage.isEmpty ||
+        thirdImage.isEmpty) {
+      return;
+    }
+
+    final List<String> ingreds = ingred.split(",");
+    final List<String> imageUrls = [
+      mainImage,
+      firstImage,
+      secondImage,
+      thirdImage
+    ];
+
+    widget.addFunction(
+      Meal(
+        id: UniqueKey().toString(),
+        title: title,
+        imageUrls: imageUrls,
+        description: desc,
+        ingredients: ingreds,
+        preparingTime: int.parse(prepTime),
+        price: double.parse(price),
+        categoryId: categoryId,
+      ),
+    );
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -43,9 +91,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         title: const Text("Ovqat qo'shish"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _save,
             icon: const Icon(Icons.save),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -83,8 +131,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               ),
               TextField(
                 decoration: const InputDecoration(
-                  labelText:
-                      "Ovqat tarikibi (Misol uchun: go'sht, Pomidor, ...)",
+                  labelText: "Ovqat tarikibi (Misol uchun: go'sht,pomidor,...)",
                 ),
                 controller: _ingredientsController,
               ),
@@ -103,22 +150,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 controller: _preparingController,
               ),
               CustomImageInput(
-                imageUrl: _imageUrls.length > 0 ? _imageUrls[0] : '',
                 imageController: _mainImageController,
                 label: 'Asosiy rasm linkini kiriting!',
               ),
               CustomImageInput(
-                imageUrl: _imageUrls.length > 1 ? _imageUrls[1] : '',
                 imageController: _firstImageController,
                 label: 'Rasm 1 linkini kiriting!',
               ),
               CustomImageInput(
-                imageUrl: _imageUrls.length > 2 ? _imageUrls[2] : '',
                 imageController: _secondImageController,
                 label: 'Rasm 2 linkini kiriting!',
               ),
               CustomImageInput(
-                imageUrl: _imageUrls.length > 3 ? _imageUrls[3] : '',
                 imageController: _thirdImageController,
                 label: 'Rasm 3 linkini kiriting!',
               ),
